@@ -13,7 +13,7 @@ function Body() {
 
     useEffect(() => {
         fetchData();
-    }, [])
+    }, []);
 
 
     const fetchData = async () => {
@@ -22,15 +22,13 @@ function Body() {
             const data = await res.json();
             const restaurants = data.data.cards[4].card.card.gridElements.infoWithStyle.restaurants
 
-            console.log(restaurants);
+            // console.log(restaurants);
             setListofRes(restaurants)
             setIsLoading(false)
         } catch (error) {
             console.error('Error fetching data', error.message)
             setIsLoading(false);
         }
-
-
     }
 
     return (
@@ -38,8 +36,6 @@ function Body() {
             <Search list={listofRes} setFilteredList={setFilteredList} />
 
             {isLoading ? (<Shimmer />) : (<Card list={filteredList.length > 0 ? filteredList : listofRes} />)}
-
-
         </div>
     )
 }

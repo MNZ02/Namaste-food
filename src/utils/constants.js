@@ -3,3 +3,5 @@ export const LOGO_URl = 'https://s3.amazonaws.com/cdn.designcrowd.com/blog/39-Fo
 export const SWIGGY_API = 'https://www.swiggy.com/dapi/restaurants/list/v5?lat=26.1157917&lng=91.7085933&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING'
 
 export const SWIGGY_IMG = 'https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/'
+
+export const SWIGGY_MENU_API = 'https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=17.4340985&lng=78.3718221&restaurantId=24610&catalog_qa=undefined'
