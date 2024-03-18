@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { SWIGGY_MENU_API } from '../utils/constants'
+import { SWIGGY_IMG } from '../utils/constants';
 
 function Menu() {
   const [resInfo, setResInfo] = useState('');
@@ -41,11 +42,24 @@ function Menu() {
 
       <div className='mt-8 m-4 p-2'>
         <h3 className='text-xl font-bold mb-4 mt-8'>Recommended</h3>
-        <ul key={resItem.card?.info.id}>
+        <ul>
           {resItem.map((item) => (
 
-            <li>{item?.card?.info?.name}</li>
-            
+            <li className='m-2 p-2 flex justify-between items-center' key={resItem.card?.info.id}>
+              <div>
+                <div>
+                  <span className='font-semibold '>{item?.card?.info?.name}</span>
+                </div>
+
+                <div>
+                  Rs. {item?.card?.info?.defaultPrice / 100 || item?.card?.info?.price / 100}
+                  {/* <button className='ml-8 p-2 bg-green-600 text-white text-sm rounded-md'>Add</button> */}
+                </div>
+              </div>
+              <div>
+                <img className='w-32 rounded-md' src={SWIGGY_IMG + item?.card?.info?.imageId} alt="" />
+              </div>
+            </li>
           )
           )}
         </ul>
