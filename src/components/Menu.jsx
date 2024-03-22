@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { SWIGGY_MENU_API } from '../utils/constants'
 import { SWIGGY_IMG } from '../utils/constants';
+import {useParams} from 'react-router-dom'; 
 
 function Menu() {
   const [resInfo, setResInfo] = useState('');
   const [resItem, setResItem] = useState([]);
+
+  const {resId} = useParams();
 
 
   useEffect(() => {
@@ -13,14 +16,14 @@ function Menu() {
 
   const fetchData = async () => {
     try {
-      const res = await fetch(SWIGGY_MENU_API);
+      const res = await fetch(SWIGGY_MENU_API + resId);
       const data = await res.json();
 
       setResInfo(data?.data?.cards[0]?.card?.card?.info);
 
-      setResItem(data?.data?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card?.itemCards);
+      setResItem(data?.data?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card?.itemCards);
 
-      console.log(data.data.cards[2].groupedCard.cardGroupMap.REGULAR.cards[2].card.card.itemCards);
+      console.log(data.data.cards[2].groupedCard.cardGroupMap.REGULAR.cards[1].card.card.itemCards);
 
     } catch (error) {
       console.error("Error fetching menu", error.message);
@@ -43,9 +46,9 @@ function Menu() {
       <div className='mt-8 m-4 p-2'>
         <h3 className='text-xl font-bold mb-4 mt-8'>Recommended</h3>
         <ul>
-          {resItem.map((item) => (
+          {resItem.map((item, index) => (
 
-            <li className='m-2 p-2 flex justify-between items-center' key={resItem.card?.info.id}>
+            <li className='m-2 p-2 flex justify-between items-center' key={resItem.card?.info.id || index}>
               <div>
                 <div>
                   <span className='font-semibold '>{item?.card?.info?.name}</span>

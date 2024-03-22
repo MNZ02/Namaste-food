@@ -13,11 +13,11 @@ function Header() {
 
                     <li className='mr-2 pr-2 cursor-pointer'>
                         <Link to='/'>Home</Link>
-                        </li>
+                    </li>
 
+                    <li className='mr-2 pr-2 cursor-pointer'><Link to='/res'>Menu</Link></li>
 
-
-                    <li className='mr-2 pr-2 cursor-pointer'><Link to='/menu'>Menu</Link></li>
+                    <li className='mr-2 pr-2 cursor-pointer'><Link to='/about'>About</Link></li>
 
                     <li className='mr-2 pr-2 cursor-pointer'>Cart</li>
                 </ul>

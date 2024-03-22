@@ -20,7 +20,7 @@ function Body() {
         try {
             const res = await fetch(SWIGGY_API);
             const data = await res.json();
-            const restaurants = data.data.cards[4].card.card.gridElements.infoWithStyle.restaurants
+            const restaurants = data.data.cards[2].card.card.gridElements.infoWithStyle.restaurants
 
             // console.log(restaurants);
             setListofRes(restaurants)
