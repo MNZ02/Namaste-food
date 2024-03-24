@@ -22,7 +22,7 @@ const useRestaurantMenu = (resId) => {
 
             setResItem(data?.data?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card?.itemCards);
 
-            console.log(data.data.cards[2].groupedCard.cardGroupMap.REGULAR.cards[1].card.card.itemCards);
+            console.log(data.data.cards[2].groupedCard.cardGroupMap.REGULAR.cards[2].card.card.itemCards);
 
         } catch (error) {
             console.error("Error fetching menu", error.message);

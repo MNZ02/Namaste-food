@@ -7,31 +7,30 @@ function Header() {
     const onlineStatus = useOnlineStatus();
 
     return (
-        <div className='flex justify-between m-4 p-4 border border-black'>
+        <div className='flex justify-between items-center my-4 px-6 py-3 shadow-lg rounded-md'>
             <div>
-                <img className='h-20 -mt-3' src={LOGO_URl} alt="logo" />
+                <img className='h-16' src={LOGO_URl} alt="logo" />
             </div>
 
             <div>
-                <ul className='flex text-xl m-2 p-2'>
+                <ul className='flex space-x-4 text-lg'>
 
-                    <li>
-                        {onlineStatus ? '🟢' : '🔴'}
+                    <li className={`font-semibold text-${onlineStatus ? 'green' : 'red'}-600`}>
+                        {onlineStatus ? 'Online🟢' : 'Offline🔴'}
                     </li>
-                    <li className='mr-2 pr-2 cursor-pointer'>
+                    <li className='hover:text-blue-600 cursor-pointer'>
                         <Link to='/'>Home</Link>
                     </li>
 
-                    <li className='mr-2 pr-2 cursor-pointer'><Link to='/res'>Menu</Link></li>
+                    <li className='hover:text-blue-600 cursor-pointer'><Link to='/res'>Menu</Link></li>
 
-                    <li className='mr-2 pr-2 cursor-pointer'><Link to='/grocery'>Grocery</Link></li>
+                    <li className='hover:text-blue-600 cursor-pointer'><Link to='/grocery'>Grocery</Link></li>
 
-                    <li className='mr-2 pr-2 cursor-pointer'><Link to='/about'>About</Link></li>
+                    <li className='hover:text-blue-600 cursor-pointer'><Link to='/about'>About</Link></li>
 
-                    <li className='mr-2 pr-2 cursor-pointer'>Cart</li>
+                    <li className='hover:text-gray-600 cursor-pointer font-semibold text-xl'>Cart</li>
                 </ul>
             </div>
-
         </div>
     )
 }

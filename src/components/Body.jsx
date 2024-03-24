@@ -7,11 +7,13 @@ import useOnlineStatus from '../utils/useOnlineStatus';
 
 
 function Body() {
-    
+
     const onlineStatus = useOnlineStatus();
     const [listofRes, setListofRes] = useState([]);
     const [filteredList, setFilteredList] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+
+    
 
     useEffect(() => {
         fetchData();
@@ -24,7 +26,7 @@ function Body() {
             const data = await res.json();
             const restaurants = data.data.cards[4].card.card.gridElements.infoWithStyle.restaurants
 
-            // console.log(restaurants);
+            console.log(restaurants);
             setListofRes(restaurants)
             setIsLoading(false)
         } catch (error) {
@@ -33,7 +35,7 @@ function Body() {
         }
     }
 
-    if(onlineStatus !== true) {
+    if (onlineStatus !== true) {
         return (
             <h1>Looks like your are offline...</h1>
         )
@@ -43,7 +45,10 @@ function Body() {
         <div>
             <Search list={listofRes} setFilteredList={setFilteredList} />
 
-            {isLoading ? (<Shimmer />) : (<Card list={filteredList.length > 0 ? filteredList : listofRes} />)}
+            {isLoading ?
+                (<Shimmer />) :
+                ( <Card list={filteredList.length > 0
+                    ? filteredList : listofRes} />)}
         </div>
     )
 }

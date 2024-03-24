@@ -18,11 +18,11 @@ function Search({ list, setFilteredList }) {
 
 
     return (
-        <div className='flex justify-center'>
-            <input onChange={e => setSearchTerm(e.target.value)} value={searchTerm} className='border border-gray-600 rounded-md m-2 p-2 bg-gray-200 outline-none' type="text" placeholder='Search...' />
-            <button onClick={() => { handleSearch() }} className='border border-gray-600 m-2 p-2 rounded-md bg-blue-400 text-white outline-none'>Search</button>
+        <div className='flex items- justify-center'>
+            <input onChange={e => setSearchTerm(e.target.value)} value={searchTerm} className='border border-gray-400 rounded-md m-2 p-2 bg-gray-200 outline-none' type="text" placeholder='Search...' />
+            <button onClick={() => { handleSearch() }} className='border border-gray-400 m-2 px-2 rounded-md bg-blue-600 hover:bg-blue-800 text-white outline-none'>Search</button>
 
-            <button onClick={() => { handleTopRated() }} className='border border-gray-600 m-2 p-2 ml-4 rounded-md bg-green-600 text-white'>Top Rated</button>
+            <button onClick={() => { handleTopRated() }} className='border border-gray-400 m-2 px-2 ml-4 rounded-md bg-green-600 hover:bg-green-700 text-white'>Top Rated</button>
 
         </div>
     )
