@@ -3,10 +3,12 @@ import Card from './Card'
 import Shimmer from './Shimmer';
 import { SWIGGY_API } from '../utils/constants';
 import Search from './Search';
+import useOnlineStatus from '../utils/useOnlineStatus';
 
 
 function Body() {
-
+    
+    const onlineStatus = useOnlineStatus();
     const [listofRes, setListofRes] = useState([]);
     const [filteredList, setFilteredList] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -20,7 +22,7 @@ function Body() {
         try {
             const res = await fetch(SWIGGY_API);
             const data = await res.json();
-            const restaurants = data.data.cards[2].card.card.gridElements.infoWithStyle.restaurants
+            const restaurants = data.data.cards[4].card.card.gridElements.infoWithStyle.restaurants
 
             // console.log(restaurants);
             setListofRes(restaurants)
@@ -29,6 +31,12 @@ function Body() {
             console.error('Error fetching data', error.message)
             setIsLoading(false);
         }
+    }
+
+    if(onlineStatus !== true) {
+        return (
+            <h1>Looks like your are offline...</h1>
+        )
     }
 
     return (
