@@ -3,6 +3,7 @@ import { SWIGGY_IMG } from '../utils/constants';
 import { Link } from 'react-router-dom';
 
 function Card({ list }) {
+    
     return (
         <div className='flex flex-wrap justify-center gap-8 md:justify-start md:gap-8 lg:gap-12 cursor-pointer mt-8 lg:ml-8'>
             {

@@ -6,6 +6,7 @@ const useRestaurantMenu = (resId) => {
 
     const [resInfo, setResInfo] = useState('');
     const [resItem, setResItem] = useState([]);
+    const [categories, setCategories] = useState([]);
 
 
     useEffect(() => {
@@ -22,13 +23,15 @@ const useRestaurantMenu = (resId) => {
 
             setResItem(data?.data?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card?.itemCards);
 
-            console.log(data.data.cards[2].groupedCard.cardGroupMap.REGULAR.cards[2].card.card.itemCards);
+            setCategories(data?.data?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards)
+
+            
 
         } catch (error) {
             console.error("Error fetching menu", error.message);
         }
     }
-    return { resInfo, resItem }
+    return { resInfo, resItem, categories }
 }
 
 export default useRestaurantMenu;

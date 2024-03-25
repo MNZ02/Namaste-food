@@ -1,29 +1,23 @@
-import React, { useEffect, useState } from 'react';
-import { SWIGGY_IMG } from '../utils/constants';
+import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import useRestaurantMenu from '../utils/useRestaurantMenu';
+import Category from './Category';
 import spinnerSvg from '../assets/spinner.svg';
 import clockSvg from '../assets/clock.svg';
 
 function Menu() {
+
   const { resId } = useParams();
   const { resInfo, resItem } = useRestaurantMenu(resId);
 
   if (!resInfo || resItem.length === 0) {
     return (
       <div className='flex justify-center items-center h-screen'>
-        <img className='w-20' src={spinnerSvg} alt="Loading..." />
+        <img className='w-28' src={spinnerSvg} alt="Loading..." />
       </div>
     );
   }
 
-  const limitDescription = (description, limit) => {
-    const words = description.split(' ');
-    if (words.length > limit) {
-      return words.slice(0, limit).join(' ') + '...';
-    }
-    return description;
-  };
 
   return (
     <div className='w-full max-w-5xl mx-auto'>
@@ -40,29 +34,8 @@ function Menu() {
         </div>
       </div>
 
-      <div className='mt-8 m-4 p-2'>
-        <h3 className='text-xl font-bold mb-4 mt-8'>Recommended</h3>
-        <ul>
-          {resItem.map((item, index) => (
-            <li className='my-8 lg:mx-4 py-6 lg:px-6 flex justify-between space-x-5 items-center' key={resItem.card?.info?.id || index}>
-              <div>
-                <div className='mb-1'>
-                  <span className='font-semibold text-lg'>{item?.card?.info?.name}</span>
-                </div>
-                <div className='px-2'>
-                  Rs.{item?.card?.info?.defaultPrice / 100 || item?.card?.info?.price / 100}
-                </div>
-                <div className='overflow-hidden sm:max-w-md xl:max-w-full px-2 py-3 text-gray-500'>
-                  <p className='text-sm'>{limitDescription(item?.card?.info?.description, 20)}</p>
-                </div>
-              </div>
-              <div>
-                <img className='w-32 lg:w-full h-24 lg:h-28 object-cover rounded-md' src={SWIGGY_IMG + item?.card?.info?.imageId} alt="" />
-              </div>
-            </li>
-          ))}
-        </ul>
-      </div>
+
+      <Category/>
     </div>
   );
 }
