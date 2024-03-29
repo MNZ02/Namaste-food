@@ -1,16 +1,12 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { SWIGGY_IMG } from '../utils/constants';
 import downArrowSvg from '../assets/downArrow.svg';
 import upArrowSvg from '../assets/upArrow.svg';
+import { useDispatch } from 'react-redux';
+import { addItem } from '../store/cartSlice';
 
 
-function ItemsList({ category }) {
-
-    const [showMenu, setShowMenu] = useState(false);
-
-    const toggleMenu = () => {
-        setShowMenu(!showMenu);
-    }
+function ItemsList({ category, showMenu, toggleMenu }) {
 
     const limitDescription = (description, limit) => {
         const words = description?.split(' ');
@@ -19,6 +15,10 @@ function ItemsList({ category }) {
         }
         return description;
     };
+
+    const dispatch = useDispatch();
+
+
 
     return (
         <div className='mt-8 m-4 p-2'>
@@ -49,6 +49,9 @@ function ItemsList({ category }) {
                                     </div>
                                     <div>
                                         <img className='w-32 lg:w-full h-24 lg:h-28 object-cover rounded-md' src={SWIGGY_IMG + item?.card?.info?.imageId} alt="" />
+                                        <div className='flex justify-center'>
+                                            <button onClick={() => dispatch(addItem(item))} className='text-green-400 font-semibold px-8 py-2 rounded-md absolute  shadow-lg bg-gray-100 hover:bg-gray-200 -mt-6'>Add</button>
+                                        </div>
                                     </div>
                                 </li>
                             )

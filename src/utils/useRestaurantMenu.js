@@ -10,8 +10,8 @@ const useRestaurantMenu = (resId) => {
 
 
     useEffect(() => {
-        if(resId)
-         fetchData();
+        if (resId)
+            fetchData();
     }, [resId])
 
     const fetchData = async () => {
@@ -19,13 +19,13 @@ const useRestaurantMenu = (resId) => {
             const res = await fetch(SWIGGY_MENU_API + resId);
             const data = await res.json();
 
-            setResInfo(data?.data?.cards[0]?.card?.card?.info);
 
-            setResItem(data?.data?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card?.itemCards);
+            setResInfo(data?.data?.cards[2]?.card?.card?.info);
 
-            setCategories(data?.data?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards)
+            setResItem(data?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[4]?.card?.card?.itemCards);
 
-            
+            setCategories(data?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards)
+
 
         } catch (error) {
             console.error("Error fetching menu", error.message);

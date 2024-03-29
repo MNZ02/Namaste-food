@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import useRestaurantMenu from '../utils/useRestaurantMenu';
 import Category from './Category';
@@ -9,6 +9,7 @@ function Menu() {
 
   const { resId } = useParams();
   const { resInfo, resItem } = useRestaurantMenu(resId);
+ 
 
   if (!resInfo || resItem.length === 0) {
     return (
@@ -35,7 +36,7 @@ function Menu() {
       </div>
 
 
-      <Category/>
+      <Category />
     </div>
   );
 }
