@@ -1,56 +1,53 @@
 import React, { useEffect, useState } from 'react'
 import Card from './Card'
-import Shimmer from './Shimmer';
-import { SWIGGY_API } from '../utils/constants';
-import Search from './Search';
-import useOnlineStatus from '../utils/useOnlineStatus';
+import Shimmer from './Shimmer'
+import { SWIGGY_API } from '../utils/constants'
+import Search from './Search'
+import useOnlineStatus from '../utils/useOnlineStatus'
 
+function Body () {
+  const onlineStatus = useOnlineStatus()
+  const [listofRes, setListofRes] = useState([])
+  const [filteredList, setFilteredList] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
 
-function Body() {
+  useEffect(() => {
+    fetchData()
+  }, [])
 
-    const onlineStatus = useOnlineStatus();
-    const [listofRes, setListofRes] = useState([]);
-    const [filteredList, setFilteredList] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
+  const fetchData = async () => {
+    try {
+      const res = await fetch(SWIGGY_API)
+      const data = await res.json()
+      console.log(data)
+      const restaurants =
+        window.innerWidth >= 768 // Check screen width
+          ? data.data.cards[4].card.card.gridElements.infoWithStyle.restaurants
+          : data.data.cards[2].card.card.gridElements.infoWithStyle.restaurants // Choose data based on screen width
 
-    
-
-    useEffect(() => {
-        fetchData();
-    }, []);
-
-
-    const fetchData = async () => {
-        try {
-            const res = await fetch(SWIGGY_API);
-            const data = await res.json();
-            const restaurants = data.data.cards[4].card.card.gridElements.infoWithStyle.restaurants
-
-            console.log(restaurants);
-            setListofRes(restaurants)
-            setIsLoading(false)
-        } catch (error) {
-            console.error('Error fetching data', error.message)
-            setIsLoading(false);
-        }
+      setListofRes(restaurants)
+      setIsLoading(false)
+    } catch (error) {
+      console.error('Error fetching data', error.message)
+      setIsLoading(false)
     }
+  }
 
-    if (onlineStatus !== true) {
-        return (
-            <h1>Looks like your are offline...</h1>
-        )
-    }
+  if (onlineStatus !== true) {
+    return <h1>Looks like your are offline...</h1>
+  }
 
-    return (
-        <div>
-            <Search list={listofRes} setFilteredList={setFilteredList} />
+  return (
+    <div>
+      <Search list={listofRes} setFilteredList={setFilteredList} />
 
-            {isLoading ?
-                (<Shimmer />) :
-                ( <Card list={filteredList.length > 0
-                    ? filteredList : listofRes} />)}
-        </div>
-    )
+      {isLoading ? (
+        <Shimmer />
+      ) : (
+        <Card list={filteredList.length > 0 ? filteredList : listofRes} />
+      )}
+    </div>
+  )
 }
 
 export default Body
